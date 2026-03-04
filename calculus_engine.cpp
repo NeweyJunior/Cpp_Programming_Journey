@@ -1,7 +1,9 @@
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 #define SENSIVITY_INTEGRAL 10000000
 #define SENSIVITY_DERIVATIVE 0.0000001
+#define SENSIVITY_LIMIT 0.0000001
 
 using namespace std;
 
@@ -94,12 +96,25 @@ double derivativeCalculate(double number){
 	return result;
 }
 
+double limitCalculate(double number){
+	double rightLimit = (number + SENSIVITY_LIMIT) * (number + SENSIVITY_LIMIT);
+	double leftLimit = (number - SENSIVITY_LIMIT) * (number - SENSIVITY_LIMIT);
+	
+	if(abs(rightLimit - leftLimit) < (10 * SENSIVITY_LIMIT)){
+		return rightLimit; // or leftLimit
+	}
+	else{
+		cout << "Limit is not found" << endl;
+		return 0;
+	}
+}
+
 void menu(){
 	cout << "================== WELCOME TO THE CALCULATOR ==================" << endl;
 	cout << "-1) Exit" << endl;
 	cout << "1) Calculate Integral (x^2)" << endl;
 	cout << "2) Calculate Derivative (x^2)" << endl;
-	cout << "3) Calculate Limit" << endl;
+	cout << "3) Calculate Limit (x^2)" << endl;
 	cout << "===============================================================" << endl;
 }
 
@@ -107,7 +122,7 @@ void smallMenu(){
 	cout << "===============================================================" << endl;
 	cout << "-1) Exit" << endl;
 	cout << "1) Calculate Integral (x^2)" << endl;
-	cout << "2) Calculate Derivative" << endl;
-	cout << "3) Calculate Limit" << endl;
+	cout << "2) Calculate Derivative (x^2)" << endl;
+	cout << "3) Calculate Limit (x^2)" << endl;
 	cout << "===============================================================" << endl;
 }
