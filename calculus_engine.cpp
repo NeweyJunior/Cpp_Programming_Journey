@@ -1,12 +1,14 @@
 #include <iostream>
 #include <iomanip>
-#define SENSIVITY 10000000
+#define SENSIVITY_INTEGRAL 10000000
+#define SENSIVITY_DERIVATIVE 0.0000001
 
 using namespace std;
 
 void menu();
 void smallMenu();
 double integralCalculate(double lower, double upper);
+double derivativeCalculate(double number);
 
 int main(){
 	menu();
@@ -23,7 +25,7 @@ int main(){
 			cin.clear();
 			cin.ignore(1000,'\n');
 			cout << "Please select a valid process." << endl;
-			cout << "===============================================================" << endl;
+			smallMenu();
 			continue;
 		}
 		
@@ -36,7 +38,7 @@ int main(){
 		//if user enters wrong value:
 		if(processNumber != -1 && processNumber != 1 && processNumber != 2 && processNumber != 3){
 			cout << "Please select a valid process." << endl;
-			cout << "===============================================================" << endl;
+			smallMenu();
 			continue;
 		}
 		
@@ -44,18 +46,24 @@ int main(){
 		switch(processNumber){
 			case 1: 
 				{
-				double upper,lower;
-				cout << "Please enter a upper limit: ";
-				cin >> upper;
-				cout << "===============================================================" << endl;
-				cout << "Please enter a lower limit: ";
-				cin >> lower;
-				cout << "===============================================================" << endl;
-				cout << "Result: " << integralCalculate(lower, upper) <<endl;
-				break;
+					double upper,lower;
+					cout << "Please enter a upper limit: ";
+					cin >> upper;
+					cout << "===============================================================" << endl;
+					cout << "Please enter a lower limit: ";
+					cin >> lower;
+					cout << "===============================================================" << endl;
+					cout << "Result: " << integralCalculate(lower, upper) << endl;
+					break;
 				}
 			case 2:
-				cout << "This process is coming soon..." << endl;
+				{
+					double number;
+					cout << "Please enter a number: ";
+					cin >> number;
+					cout << "===============================================================" << endl;
+					cout << "Result: " << derivativeCalculate(number) << endl;
+				}
 				break;
 			case 3:
 				cout << "This process is coming soon..." << endl;
@@ -67,12 +75,12 @@ int main(){
 	return 0;
 }
 double integralCalculate(double lower, double upper){
-	double wide = (upper - lower) / SENSIVITY;
+	double wide = (upper - lower) / SENSIVITY_INTEGRAL;
 	double highPoint;
 	double highPointValue;
 	double result = 0;
 	
-	for(int k = 1; k < SENSIVITY; k++){
+	for(int k = 1; k < SENSIVITY_INTEGRAL; k++){
 		highPoint = lower + k * (wide);
 		highPointValue = (highPoint) * (highPoint);
 		
@@ -81,11 +89,16 @@ double integralCalculate(double lower, double upper){
 	return result;
 }
 
+double derivativeCalculate(double number){
+	double result = ((number + SENSIVITY_DERIVATIVE) * (number + SENSIVITY_DERIVATIVE) - number * number) / SENSIVITY_DERIVATIVE;
+	return result;
+}
+
 void menu(){
 	cout << "================== WELCOME TO THE CALCULATOR ==================" << endl;
 	cout << "-1) Exit" << endl;
 	cout << "1) Calculate Integral (x^2)" << endl;
-	cout << "2) Calculate Derivative" << endl;
+	cout << "2) Calculate Derivative (x^2)" << endl;
 	cout << "3) Calculate Limit" << endl;
 	cout << "===============================================================" << endl;
 }
