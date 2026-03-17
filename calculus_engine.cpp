@@ -11,6 +11,7 @@ void menu();
 void smallMenu();
 double integralCalculate(double lower, double upper);
 double derivativeCalculate(double number);
+double limitCalculate(double number);
 
 int main(){
 	menu();
@@ -65,16 +66,26 @@ int main(){
 					cin >> number;
 					cout << "===============================================================" << endl;
 					cout << "Result: " << derivativeCalculate(number) << endl;
+					break;
 				}
-				break;
 			case 3:
-				cout << "This process is coming soon..." << endl;
+				{
+					double number;
+					cout << "Please enter a number: ";
+					cin >> number;
+					cout << "===============================================================" << endl;
+					cout << "Result: " << limitCalculate(number) << endl;
 				break;
+				}
+				
 		}
 		smallMenu();
 	}
 	
 	return 0;
+}
+double f(double x){
+	return x * x;
 }
 double integralCalculate(double lower, double upper){
 	double wide = (upper - lower) / SENSIVITY_INTEGRAL;
@@ -84,7 +95,7 @@ double integralCalculate(double lower, double upper){
 	
 	for(int k = 1; k < SENSIVITY_INTEGRAL; k++){
 		highPoint = lower + k * (wide);
-		highPointValue = (highPoint) * (highPoint);
+		highPointValue = f(highPoint);
 		
 		result += highPointValue * wide;
 	}
@@ -92,15 +103,15 @@ double integralCalculate(double lower, double upper){
 }
 
 double derivativeCalculate(double number){
-	double result = ((number + SENSIVITY_DERIVATIVE) * (number + SENSIVITY_DERIVATIVE) - number * number) / SENSIVITY_DERIVATIVE;
+	double result = (f(number + SENSIVITY_DERIVATIVE) - f(number)) / SENSIVITY_DERIVATIVE;
 	return result;
 }
 
 double limitCalculate(double number){
-	double rightLimit = (number + SENSIVITY_LIMIT) * (number + SENSIVITY_LIMIT);
-	double leftLimit = (number - SENSIVITY_LIMIT) * (number - SENSIVITY_LIMIT);
+	double rightLimit = f(number + SENSIVITY_LIMIT);
+	double leftLimit = f(number - SENSIVITY_LIMIT);
 	
-	if(abs(rightLimit - leftLimit) < (10 * SENSIVITY_LIMIT)){
+	if(abs(rightLimit - leftLimit) < (10000 * SENSIVITY_LIMIT)){
 		return rightLimit; // or leftLimit
 	}
 	else{
