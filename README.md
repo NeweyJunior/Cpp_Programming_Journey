@@ -62,5 +62,19 @@ A dynamic data structure implementation designed to store and manage F1 driver r
 * **Memory Management**: Manual allocation using `new` and systematic deallocation using `delete`.
 * **Pointers**: Utilizes struct/class pointers for node linking and data retrieval.
 
+## 🏋️ Dynamic Fitness Management (`dynamic_fitness_management.cpp`)
+
+A fitness club membership management simulation that demonstrates the use of class-level (static) variables and dynamic object arrays. The system is populated with a 21-driver F1 grid to stress-test capacity limits and memory handling.
+
+### 🛠 Features
+* **Shared Class State**: Utilizes `static` variables (`personLimit`, `priceForMonth`) to manage global facility rules independently from individual customer objects.
+* **Automated Object Generation**: Replaces manual instantiation with a dynamic pointer array (`Customer* grid[21]`), instantiating objects iteratively via a `for` loop.
+* **Input Validation & Logic**: Includes a robust `while(true)` loop to handle incorrect membership durations and calculate precise payment differences (under/overpayments).
+
+### 🔧 Technical Details
+* **Memory Management**: Prevents memory leaks by cleanly iterating through the pointer array with `delete` upon program exit.
+* **Data Initialization**: Prevents garbage value errors by strictly initializing default states (e.g., `membershipTime = 0`) within the constructor.
+* **Boundary Testing**: Implements strict `<` boundary checks to accurately enforce maximum capacity limits without off-by-one errors.
+
 ---
 *Future goal: Adapting these algorithms and OOP structures for real-time F1 telemetry and simulation data.* 🏁
