@@ -48,5 +48,19 @@ An interactive telemetry dashboard simulating pit-wall data collection. It dynam
 * **Pointer Nesting**: Demonstrates safe chaining and dereferencing (`->`) from a manager object to a dynamically allocated component.
 * **Cleanup Hierarchy**: Cascading memory deallocation (deleting the inner sensor before the outer board).
 
+## 📻 F1 Radio Log System (`f1_radio_linked_list.cpp`)
+
+A dynamic data structure implementation designed to store and manage F1 driver radio messages. This project is built from scratch to demonstrate the fundamental principles of linked lists without relying on standard C++ libraries like `<vector>` or `<list>`.
+
+### 🛠 Features
+* **Dynamic Sizing**: Implements a singly linked list to add new messages dynamically, eliminating the constraints of fixed-size arrays.
+* **Node Traversal**: Uses pointer iteration to navigate through the linked nodes and display chronological radio logs.
+* **Safe Memory Deallocation**: Features a custom memory cleanup algorithm that safely disconnects and deletes each node step-by-step, ensuring zero memory leaks upon program termination.
+
+### 🔧 Technical Details
+* **Data Structure**: Singly Linked List (Node-based architecture).
+* **Memory Management**: Manual allocation using `new` and systematic deallocation using `delete`.
+* **Pointers**: Utilizes struct/class pointers for node linking and data retrieval.
+
 ---
 *Future goal: Adapting these algorithms and OOP structures for real-time F1 telemetry and simulation data.* 🏁
