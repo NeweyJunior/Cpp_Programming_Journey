@@ -16,7 +16,6 @@ class radioMessage{
         }
 };
 
-static int count = 0;
 radioMessage* addMessage(radioMessage* root, string message, string driverName);
 void showMessage(radioMessage* root);
 void deleteMessages(radioMessage* root);
